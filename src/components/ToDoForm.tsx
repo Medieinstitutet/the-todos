@@ -1,6 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 interface IToDoFormProps {
   toDoForm: (theNewToDo: string) => void;
+  sortToDos: () => void;
 }
 export const ToDoForm = (props: IToDoFormProps) => {
   const [newToDo, setNewToDo] = useState("");
@@ -27,9 +28,11 @@ export const ToDoForm = (props: IToDoFormProps) => {
               onChange={handleChange}
             ></input>
           </label>
-          <input className="form-submit" type="submit"  />
-          <button className="sort-btn">Sort</button>
+          <input className="form-submit" type="submit" />
         </form>
+        <button className="sort-btn" onClick={props.sortToDos}>
+          Sort
+        </button>
       </div>
     </>
   );

@@ -28,10 +28,15 @@ export const ToDoApp = () => {
   const handleToDoDelete = (name: string) => {
     setToDos(toDos.filter((toDo) => toDo.name !== name ));
   }
+  const handleToDoSort = () => {
+
+    const sortedToDos = [...toDos].sort((a,b) => a.name.localeCompare(b.name));
+    setToDos(sortedToDos)
+  }
 
   return (
     <>
-      <ToDoForm toDoForm={addANewToDo} />
+      <ToDoForm toDoForm={addANewToDo} sortToDos={handleToDoSort} />
       <ul>
         <ToDos toDos={toDos} doToDo={handleToDoTask} deleteToDo={handleToDoDelete} />
       </ul>
