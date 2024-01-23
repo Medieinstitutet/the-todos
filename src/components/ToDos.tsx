@@ -16,7 +16,7 @@ export const ToDos = (props: IToDosProps) => {
             toDo={toDo}
             doToDo={props.doToDo}
             deleteToDo={props.deleteToDo}
-            key={Math.random() * 1000}
+            key={toDo.name}
           />
         );
       })}
