@@ -3,70 +3,45 @@ import { ToDoForm } from "./ToDoForm";
 import { ToDo } from "../moduls/ToDo";
 import { ToDos } from "./ToDos";
 
-// export const ToDoApp = () => {
-//   const [toDos, setToDos] = useState<ToDo[]>([
-
-//     new ToDo("WAKE UP!", false),
-//     new ToDo("Turn on coffee", false),
-//     new ToDo("Fry some eggs", false),
-//     new ToDo("Turn on the computer", false),
-  
-  
-//   ]);
-
-  
- 
-  export const ToDoApp = () => {
-    const [toDos, setToDos] = useState<ToDo[]>(() => {
-      const savedToDos = localStorage.getItem("toDos");
-      if (savedToDos) {
-        return JSON.parse(savedToDos);
-      } else {
-        return [
-          new ToDo("WAKE UP!", false),
-          new ToDo("Turn on coffee", false),
-          new ToDo("Fry some eggs", false),
-          new ToDo("Turn on the computer", false),
-        ];
-      }
-    });
-  
-
-  // useEffect(() => {
-  //   console.log("Saving to localStorage:", toDos);
-  //   localStorage.setItem("toDos", JSON.stringify(toDos));
-  // }, [toDos]);
+export const ToDoApp = () => {
+  const [toDos, setToDos] = useState<ToDo[]>(
+    JSON.parse(localStorage.getItem("toDos") ||
+      JSON.stringify([
+        new ToDo("WAKE UP!", false),
+        new ToDo("Turn on coffee", false),
+        new ToDo("Fry some eggs", false),
+        new ToDo("Turn on the computer", false),
+      ])
+  ));
 
   const handleToDoTask = (name: string): void => {
-   
-    setToDos(
-      toDos.map((toDo) => {
-       
-        if (toDo.name === name) {
-          return { ...toDo, isToDoDone: !toDo.isToDoDone };
-         
-        } else {
-          return toDo;
-          
-        }
-       
-      })
-     
-    );
-   
+    const updatedToDos = toDos.map((toDo) => {
+      if (toDo.name === name) {
+        return { ...toDo, isToDoDone: !toDo.isToDoDone };
+      } else {
+        return toDo;
+      }
+    })
+      
+      
+      setToDos(updatedToDos)
+
+    localStorage.setItem("toDos", JSON.stringify(updatedToDos));
   };
   const addANewToDo = (theNewToDo: string) => {
-    setToDos([...toDos, new ToDo(theNewToDo, false)]);
-    localStorage.setItem("toDos", JSON.stringify(theNewToDo));
+   const newToDo =[...toDos, new ToDo(theNewToDo, false)];
+   setToDos(newToDo);
+    localStorage.setItem("toDos", JSON.stringify(newToDo));
   };
   const handleToDoDelete = (name: string) => {
-    setToDos(toDos.filter((toDo) => toDo.name !== name));
-    localStorage.setItem("toDos", JSON.stringify(toDos));
+    const filteredToDos = toDos.filter((toDo) => toDo.name !== name);
+    setToDos(filteredToDos);
+    localStorage.setItem("toDos", JSON.stringify(filteredToDos));
   };
   const handleToDoSort = () => {
     const sortedToDos = [...toDos].sort((a, b) => a.name.localeCompare(b.name));
     setToDos(sortedToDos);
-    localStorage.setItem("toDos", JSON.stringify(toDos));
+    localStorage.setItem("toDos", JSON.stringify(sortedToDos));
   };
 
   return (
