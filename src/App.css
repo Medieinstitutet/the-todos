@@ -52,6 +52,9 @@ html {
 .del-btn:hover {
   background-color:var(--toDo-del-color);
 }
+.do-btn:hover {
+  background-color: var(--toDo-done-color);
+}
 
 button:hover
  {
