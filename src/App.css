@@ -3,7 +3,9 @@
 
 :root {
   --primary-color: #5e35b1;
-  --secondary-color: #ff8a65;
+  --secondary-color: #450f5a;
+  --toDo-done-color:  #0f5a33;
+  --toDo-del-color:  #a00808;
   --background-color: #f5f5f6;
   --text-color: #263238;
   --text-color-light: #ffffff;
@@ -45,12 +47,18 @@ html {
 }
 .form-input::placeholder {
   color: var(--text-color-light);
-  opacity: 0.5;
+  opacity: 0.7;
+}
+.del-btn:hover {
+  background-color:var(--toDo-del-color);
 }
 
-button:hover,
-.do-btn.active {
+button:hover
+ {
   background-color: var(--secondary-color);
+}
+.do-btn.active {
+background-color: var(--toDo-done-color);
 }
 
 
@@ -74,9 +82,10 @@ h3 {
 }
 
 .toDoDone {
-  color: var(--secondary-color);
+  color: var(--toDo-done-color);
+  opacity: 0.7;
   text-decoration: line-through;
-  opacity: 0.5;
+  
 }
 
 ul {
